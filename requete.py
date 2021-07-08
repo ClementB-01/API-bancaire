@@ -1,5 +1,5 @@
-from typing import Container
 import requests
+import time
 
 url = "https://6007f1a4309f8b0017ee5022.mockapi.io/api/m1/accounts"
 continuer = True
@@ -35,13 +35,48 @@ while continuer:
         currency = input("Devise -> ?   ")
 
         newAccount = {
-            'id' : iD,
-            'account-name' : account_name,
+            #'id' : iD,
+            'account_name' : account_name,
             'amount' : amount,
             'iban' : iban,
             'currency' : currency
         }
 
-        
+        requete = requests.post(url, newAccount)
+        if requete.status_code == 201:
+            print("Succès de la requête")
+            print(requests.get(f"{url}/{iD}").text)
+        else:
+            print("Echec de la requête")
+
+    if choix == 2: #Fonctionnel
+        i = 1
+        r = requests.get(f"{url}/{i}")
+        while r.text != "\"Not found\"":
+            i += 1
+            print(r.text)
+            r = requests.get(f"{url}/{i}")                        
+            time.sleep(1)
+
+    if choix == 3:
+        iD = int(input("Identifiant -> ?   "))
+        reqResult = requests.get(f"{url}/{iD}")
+        print(reqResult.text) # Changer affichage si trop dégueulasse
+
+    if choix == 4:
+        iban = int(input("Iban -> ?   "))
+        reqResult = requests.get(url)
+        print(reqResult.text)
+
+    if choix == 5:
+        account_name = int(input("Nom du client -> ?   "))
+        reqResult = requests.get(url, )
+        print(reqResult.text)
+
+    if choix == 6:
+        #reqResult = requests.get(url)
+        #nbId = requests.get(url)
+        print(type(requests.get(url)))
+
 
 
