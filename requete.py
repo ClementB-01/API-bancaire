@@ -6,6 +6,7 @@ continuer = True
 
 while continuer:
 
+    input("Appuyer sur enter pour continuer")
     print("Bienvenue au sein de cette API bancaire")
     print()
     print("----------------------------------------------------------------------------------------------------------------------")
@@ -27,7 +28,8 @@ while continuer:
 
     #if choix not in [1,2,3,4,5,6]:
         #print("Tu fais chier, essaye de faire un effort sérieux !")
-    if choix == 1:
+    
+    if choix == 1: #Fonctionnel
         iD = input("Identifiant -> ?   ")
         account_name = input("Nom du client -> ?   ")
         amount = input("Montant -> ?   ")
@@ -57,21 +59,25 @@ while continuer:
             print(r.text)
             r = requests.get(f"{url}/{i}")                        
             time.sleep(1)
-
-    if choix == 3:
+ 
+    if choix == 3: #Fonctionnel
         iD = int(input("Identifiant -> ?   "))
         reqResult = requests.get(f"{url}/{iD}")
         print(reqResult.text) # Changer affichage si trop dégueulasse
 
     if choix == 4:
         iban = int(input("Iban -> ?   "))
-        reqResult = requests.get(url)
-        print(reqResult.text)
+        reqResult = requests.get(url).text
+        i = 0
+        cleartext = ""
+        while i < len(reqResult):
+            if i == '}':
+                        print(reqResult)
 
     if choix == 5:
-        account_name = int(input("Nom du client -> ?   "))
-        reqResult = requests.get(url, )
-        print(reqResult.text)
+        account_name = input("Nom du client -> ?   ")
+        reqResult = requests.get(url).data
+        print(reqResult[0])
 
     if choix == 6:
         #reqResult = requests.get(url)
