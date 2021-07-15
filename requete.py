@@ -18,7 +18,6 @@ while continuer:
     print("||       3. Recherche d'un compte par n°id                                                                          ||")
     print("||       4. Recherche d'un compte par Iban                                                                          ||")
     print("||       5. Recherche d'un compte par nom                                                                           ||")
-    print("||       6. Tri de richesse sur les comptes                                                                         ||")
     print("                                                                                                                      ")
     print("----------------------------------------------------------------------------------------------------------------------")
     print("----------------------------------------------------------------------------------------------------------------------")
@@ -67,12 +66,10 @@ while continuer:
 
     if choix == 4:
         iban = input("Iban -> ?   ")
-        reqResult = requests.get(url).text
-        i = 0
-        cleartext = ""
-        while i < len(reqResult):
-            if i == '}':
-                print(reqResult)
+        reqResult = requests.get(url).json
+        for account in reqResult:
+            if account["Iban"] == iban:
+                print(account)
 
     if choix == 5:
         account_name = input("Nom du client -> ?   ")
@@ -81,7 +78,3 @@ while continuer:
             if account["account_name"] == account_name:
                 print(account)
 
-    if choix == 6:
-        #reqResult = requests.get(url)
-        #nbId = requests.get(url)
-        print(type(requests.get(url)))
