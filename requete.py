@@ -66,9 +66,9 @@ while continuer:
 
     if choix == 4:
         iban = input("Iban -> ?   ")
-        reqResult = requests.get(url).json
+        reqResult = requests.get(url).json()
         for account in reqResult:
-            if account["Iban"] == iban:
+            if account["iban"] == iban:
                 print(account)
 
     if choix == 5:
