@@ -1,7 +1,7 @@
 import requests
 import time
 
-url = "https://6007f1a4309f8b0017ee5022.mockapi.io/api/m1/accounts"
+url = input("Veuillez entrer l'url pour se connecter : ")
 continuer = True
 
 while continuer:
